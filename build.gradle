@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id "com.scuilion.syntastic" version "0.3.8"
+}
+
+group 'app.saikat'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    testLogging.showStandardStreams =true
+
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+}
+
+dependencies {
+    implementation project(':LogManagement')
+    implementation project(':PojoCollections')
+    implementation project(':DIManagement')
+    
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.6.Final'
+    // implementation group: 'com.walterjwhite.java.dependencies', name: 'hibernate-hikari', version: '0.0.17'
+
+    compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+
+    runtime group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
+
+    // implementation project(':PojoCollections')
+
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}

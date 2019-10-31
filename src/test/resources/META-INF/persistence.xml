@@ -1,0 +1,33 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="postgresql">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>app.saikat.DatabaseManagement.Device.DeviceModel</class>
+
+        <properties>
+            <!-- JPA -->
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/pi_db" /> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.user" value="saii" /> <!-- DB User -->
+            <property name="javax.persistence.jdbc.password" value="jpa_data" /> <!-- DB Password -->
+
+            <!-- Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/> <!-- DB Dialect -->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" /> <!-- create / create-drop / update -->
+            <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
+            <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
+
+            <!-- Hikari-->
+            <!-- <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" /> -->
+            <!-- <property name="hibernate.hikari.jdbcUrl" value="jdbc:postgresql://localhost/pi_db"/> -->
+
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

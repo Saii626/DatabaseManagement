@@ -1,0 +1,6 @@
+include ':LogManagement', ':PojoCollections', ':DIManagement'
+
+project(':LogManagement').projectDir = file('../LogManagement')
+project(':PojoCollections').projectDir = file('../PojoCollections')
+project(':DIManagement').projectDir = file('../DIManagement')
+rootProject.name = 'DatabaseManagement'
