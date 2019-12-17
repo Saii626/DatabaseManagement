@@ -1,30 +1,37 @@
 package app.saikat.DatabaseManagement.BaseClasses;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-import app.saikat.DatabaseManagement.Device.DeviceModelRepo;
+import javax.inject.Provider;
+import javax.inject.Singleton;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import app.saikat.DIManagement.Interfaces.DIManager;
+
+@Singleton
 public class RepositoryFactory {
 
-	private final static EntityManagerFactory entityManagerFactory;
+	private final Map<Class<?>, Provider<?>> providerMap;
+	private Logger logger = LogManager.getLogger(RepositoryFactory.class);
 
-	static {
-		entityManagerFactory = Persistence.createEntityManagerFactory("postgresql");
+	public RepositoryFactory(DIManager manager) {
+		logger.debug("superclassbeans: {}", manager.getBeansOfSuperClass(AbstractBaseRepository.class));
+		providerMap = manager.getBeansOfSuperClass(AbstractBaseRepository.class).parallelStream()
+				.collect(Collectors.toMap(b -> b.getProviderType(), b -> b.getProvider()));
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends AbstractBaseRepository>  T getRepository(Class<T> cls) {
+	public <T extends AbstractBaseRepository> T getRepository(Class<T> cls) {
 
-		if (entityManagerFactory == null) {
-			throw new RuntimeException("Set entityManagerFactory before calling this method");
+		Provider<T> repoProvider = (Provider<T>) providerMap.get(cls);
+		if (repoProvider == null) {
+			throw new RuntimeException("No such repository found");
 		}
-		
-		if (cls.equals(DeviceModelRepo.class)) {
-			return (T) DeviceModelRepo.getNewInstance(entityManagerFactory);
-		} else {
-			throw new RuntimeException("Don't know how to create " +cls.getSimpleName()+" repository");
-		}
+
+		return repoProvider.get();
 	}
-	
+
 }

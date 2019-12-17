@@ -9,11 +9,7 @@ import app.saikat.DatabaseManagement.BaseClasses.AbstractBaseRepository;
 
 public class DeviceModelRepo extends AbstractBaseRepository {
 
-	public static DeviceModelRepo getNewInstance(EntityManagerFactory entityManagerFactory) {
-		return new DeviceModelRepo(entityManagerFactory);
-	}
-
-	public DeviceModelRepo(EntityManagerFactory entityManagerFactory) {
+	protected DeviceModelRepo(EntityManagerFactory entityManagerFactory) {
 		super(entityManagerFactory);
 	}
 

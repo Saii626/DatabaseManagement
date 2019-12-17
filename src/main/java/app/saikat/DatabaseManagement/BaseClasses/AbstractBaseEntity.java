@@ -12,8 +12,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
 
-import app.saikat.LogManagement.Logger;
-import app.saikat.LogManagement.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @MappedSuperclass
 public abstract class AbstractBaseEntity implements Serializable {
@@ -21,7 +21,7 @@ public abstract class AbstractBaseEntity implements Serializable {
 	private static final long serialVersionUID = -5870784363379548033L;
 
 	@Transient
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LogManager.getLogger(this.getClass());
 
 	@Id
 	@GeneratedValue

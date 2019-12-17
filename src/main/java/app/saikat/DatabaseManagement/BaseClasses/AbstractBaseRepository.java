@@ -3,23 +3,20 @@ package app.saikat.DatabaseManagement.BaseClasses;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import app.saikat.LogManagement.Logger;
-import app.saikat.LogManagement.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import app.saikat.Annotations.DIManagement.ScanSubClass;
+
+@ScanSubClass(autoManage = true)
 public abstract class AbstractBaseRepository implements AutoCloseable {
 
-	public static <T extends AbstractBaseRepository> T getNewInstance(EntityManagerFactory entityManagerFactory) {
-		throw new RuntimeException("Override and provide valid initialization");
-	}
+	protected Logger logger = LogManager.getLogger(this.getClass());
 
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
-	// Local EntityManagerInstance
 	protected EntityManager entityManager = null;
-	// protected EntityTransaction transaction = null;
 
 	protected AbstractBaseRepository(EntityManagerFactory entityManagerFactory) {
-		entityManager = entityManagerFactory.createEntityManager();
+		entityManager = entityManagerFactory.createEntityManager();		
 		entityManager.getTransaction().begin();
 	}
 

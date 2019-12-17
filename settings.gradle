@@ -1,6 +1,7 @@
-include ':LogManagement', ':PojoCollections', ':DIManagement'
+include ':PojoCollections', ':DIManagement', ':Annotations'
 
-project(':LogManagement').projectDir = file('../LogManagement')
 project(':PojoCollections').projectDir = file('../PojoCollections')
 project(':DIManagement').projectDir = file('../DIManagement')
+project(':Annotations').projectDir = file('../Annotations')
+
 rootProject.name = 'DatabaseManagement'
