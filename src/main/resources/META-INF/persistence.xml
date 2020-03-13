@@ -8,6 +8,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <class>app.saikat.DatabaseManagement.Device.DeviceModel</class>
+        <class>app.saikat.DatabaseManagement.SocketMessage.MessageModel</class>
 
         <properties>
             <!-- JPA -->

@@ -6,9 +6,10 @@ import javax.persistence.EntityManagerFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import app.saikat.Annotations.DIManagement.ScanSubClass;
+import app.saikat.Annotations.DIManagement.Scan;
+import app.saikat.DatabaseManagement.Impl.RepositoryBeanManager;
 
-@ScanSubClass(autoManage = true)
+@Scan(beanManager = RepositoryBeanManager.class)
 public abstract class AbstractBaseRepository implements AutoCloseable {
 
 	protected Logger logger = LogManager.getLogger(this.getClass());

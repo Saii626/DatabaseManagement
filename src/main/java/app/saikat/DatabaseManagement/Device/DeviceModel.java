@@ -27,7 +27,7 @@ public class DeviceModel extends AbstractBaseEntity {
 	private String password;
 
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(nullable = false, updatable = false)
 	private DeviceType deviceType;
 	
 	@Column(length = 1000)
@@ -79,6 +79,36 @@ public class DeviceModel extends AbstractBaseEntity {
 
 	public void setData(String data) {
 		this.data = data;
+	}
+
+	public DeviceModel name(String name) {
+		this.name = name;
+		return this;
+	}
+
+	public DeviceModel description(String description) {
+		this.description = description;
+		return this;
+	}
+
+	public DeviceModel token(String token) {
+		this.token = token;
+		return this;
+	}
+
+	public DeviceModel password(String password) {
+		this.password = password;
+		return this;
+	}
+
+	public DeviceModel deviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;
+		return this;
+	}
+
+	public DeviceModel data(String data) {
+		this.data = data;
+		return this;
 	}
 
 }
